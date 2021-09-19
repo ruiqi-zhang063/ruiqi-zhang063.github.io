@@ -3,22 +3,28 @@
 <head>
         <meta charset="utf-8" />
         <meta name="generator" content="Pelican" />
-        <title>BIOS823 Assignment - misc</title>
+        <title>Homework 1</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
         <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="BIOS823 Assignment Atom Feed" />
+        <meta name="description" content="Homework 1 - Math Fun Problem 123 - Prime square remainders (solved by 11386 people, I am the 11387th.) Let $p_n$ be the $n$th prime: $2, 3, 5, 7,..." />
 </head>
 
 <body id="index" class="home">
         <header id="banner" class="body">
                 <h1><a href="/">BIOS823 Assignment</a></h1>
                 <nav><ul>
-                    <li class="active"><a href="/category/misc.html">misc</a></li>
+                    <li class="active"><a href="/category/homework-1.html">Homework 1</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/Homework 1.html" rel="bookmark"
+           title="Permalink to Homework 1">Homework 1</a></h1>
+    </header>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/homework-1.html">Homework 1</a></h1>
+    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2021-09-03T00:00:00-04:00">
                 Published: Fri 03 September 2021
@@ -27,9 +33,9 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/ruiqi-zhang.html">Ruiqi Zhang</a>
         </address>
-<p>In <a href="/category/misc.html">misc</a>.</p>
+<p>In <a href="/category/homework-1.html">Homework 1</a>.</p>
 
-</footer><!-- /.post-info --><h1>Homework 1 - Math Fun</h1>
+</footer><!-- /.post-info -->      <h1>Homework 1 - Math Fun</h1>
 <h4>Problem 123 - Prime square remainders (solved by 11386 people, I am the 11387th.)</h4>
 <p>Let $p_n$ be the $n$th prime: $2, 3, 5, 7, 11, ...,$ and let $r$ be the remainder when $(p_n−1)^n + (p_n+1)^n$ is divided by $p_n^2$.</p>
 <p>For example, when $n = 3$, $p_3 = 5$, and $4^3 + 6^3 = 280 ≡ 5$ mod $25$.</p>
@@ -59,8 +65,11 @@ Also M(2,73,100)=0 because there does not exist a positive integer ≤ 100 that 
 <h4>Solution</h4>
 <p>In this question, we can also first generate a prime list. For any new number, if it cannot be divisible by any prime number smaller than it, then it is also a prime number. In fact, we only need to test the prime number smaller sqrt of this new number.</p>
 <p>Then for any two different primes p and q, if their product is smaller than required N, then M(p,q,N) will be larger than 0. Suppose q is the larger prime, and $q^{n_2}<N, q^{n_2+1}>N$, then we decrease $n_2$ in turn, and find $n_1$ that is not 0 and make $q^{n_2}p^{n_1}<N, q^{n_2}p^{n_1+1}>N$. In this processing, temp will be replaced by the largest  $q^{n_2}p^{n_1}$. Then the final temp will be the M(p,q,N). Sum all the M(p,q,N) and we get the result.</p>
-<p>The answer is 11109800204052.</p>                </article>
-            </aside><!-- /#featured -->
+<p>The answer is 11109800204052.</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>links</h2>
@@ -68,7 +77,6 @@ Also M(2,73,100)=0 because there does not exist a positive integer ≤ 100 that 
                             <li><a href="https://getpelican.com/">Pelican</a></li>
                             <li><a href="https://www.python.org/">Python.org</a></li>
                             <li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
-                            <li><a href="#">You can modify those links in your config file</a></li>
                         </ul>
                 </div><!-- /.blogroll -->
                 <div class="social">
@@ -76,8 +84,6 @@ Also M(2,73,100)=0 because there does not exist a positive integer ≤ 100 that 
                         <ul>
                             <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
 
-                            <li><a href="#">You can add links in your config file</a></li>
-                            <li><a href="#">Another social link</a></li>
                         </ul>
                 </div><!-- /.social -->
         </section><!-- /#extras -->
