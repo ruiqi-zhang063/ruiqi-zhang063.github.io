@@ -1,6 +1,8 @@
-title: Homework 1
-date: 09/03/2021
-author: Ruiqi Zhang
+Title: Homework 1  
+Date: 09/03/2021   
+Author: Ruiqi Zhang  
+Slug: Homework 1
+Category: Homework 1
 
 # Homework 1 - Math Fun
 
