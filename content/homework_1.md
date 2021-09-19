@@ -1,4 +1,4 @@
-Title: Homework 1  
+Title: Homework 1 Explanation
 Date: 09/03/2021   
 Author: Ruiqi Zhang  
 Slug: Homework 1
