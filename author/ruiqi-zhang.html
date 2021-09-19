@@ -19,7 +19,7 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/Homework 1 notebook.html">Homework 1</a></h1>
+                    <h1 class="entry-title"><a href="/Homework 2 notebook.html">Homework 2</a></h1>
 <footer class="post-info">
         <abbr class="published" title="2021-09-19T00:00:00-04:00">
                 Published: Sun 19 September 2021
@@ -28,7 +28,7 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/ruiqi-zhang.html">Ruiqi Zhang</a>
         </address>
-<p>In <a href="/category/homework-1.html">Homework 1</a>.</p>
+<p>In <a href="/category/homework-2.html">Homework 2</a>.</p>
 
 </footer><!-- /.post-info --><style type="text/css">/*!
 *
@@ -1144,7 +1144,7 @@ h6:hover .anchor-link {
  .highlight pre  .il { color: #666666 } /* Literal.Number.Integer.Long */</style><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Homework-1---Math-Fun">Homework 1 - Math Fun<a class="anchor-link" href="#Homework-1---Math-Fun">&#182;</a></h2><h4 id="Ruiqi-Zhang">Ruiqi Zhang<a class="anchor-link" href="#Ruiqi-Zhang">&#182;</a></h4>
+<h2 id="Homework-2---Number-theory-and-a-Google-recruitment-puzzle">Homework 2 - Number theory and a Google recruitment puzzle<a class="anchor-link" href="#Homework-2---Number-theory-and-a-Google-recruitment-puzzle">&#182;</a></h2><h4 id="Ruiqi-Zhang">Ruiqi Zhang<a class="anchor-link" href="#Ruiqi-Zhang">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -1160,31 +1160,20 @@ h6:hover .anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Problem-123---Prime-square-remainders-(solved-by-11386-people,-I-am-the-11387th.)">Problem 123 - Prime square remainders (solved by 11386 people, I am the 11387th.)<a class="anchor-link" href="#Problem-123---Prime-square-remainders-(solved-by-11386-people,-I-am-the-11387th.)">&#182;</a></h4><p>Let $p_n$ be the $n$th prime: $2, 3, 5, 7, 11, ...,$ and let $r$ be the remainder when $(p_n−1)^n + (p_n+1)^n$ is divided by $p_n^2$.</p>
-<p>For example, when $n = 3$, $p_3 = 5$, and $4^3 + 6^3 = 280 ≡ 5$ mod $25$.</p>
-<p>The least value of $n$ for which the remainder first exceeds $10^9$ is $7037$.</p>
-<p>Find the least value of $n$ for which the remainder first exceeds $10^{10}$.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h4><p>In this question, we can first generate a prime list. For any new number, if it cannot be divisible by any prime number smaller than it, then it is also a prime number.</p>
-<p>Then when we get a new prime, and the index in prime list plus 1 is the n. Then every time we obtain a new prime number, we can use the formula from question to test whether it is the number we want. If it meet the requirement, we can change the value of parameter 'requirement' to stop the while loop.</p>
-<p>The answer is 21035.</p>
+<h4 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h4><p>Use the expansion function to expand the expression and keep decimal parts. Then use sliding_windows to get the n-digits number list we need to test. Finally, use judge_prime function to find the first n-digits number that is prime. The judge_prime function uses Sieve of Eratosthenes to find all primes that less than the sqrt(number), and then test whether this number is divisible by these primes. If this number is not divisible for all primes that less than sqrt(number), then this number is a prime.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[245]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">time</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;Import required package&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sym</span>
 </pre></div>
 
     </div>
@@ -1194,226 +1183,246 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[246]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;Solution function for problem 123</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">expansion</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Expand expression and keep decimal parts</span>
 
-<span class="sd">It is used to find the least value of n for which the remainder first exceeds parameter number.</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="k">def</span> <span class="nf">least_value_of_n</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Find the least value of n for which the remainder first exceeds number</span>
-<span class="sd">    </span>
 <span class="sd">    Parameter</span>
 <span class="sd">    ----------------------</span>
-<span class="sd">    number : int</span>
-<span class="sd">        The required number that the remainder first exceeds.</span>
-<span class="sd">    prime_list : list</span>
-<span class="sd">        The list increases prime numbers in order</span>
-<span class="sd">    next_number : int</span>
-<span class="sd">        The next number to test</span>
-<span class="sd">    requirement : int</span>
-<span class="sd">        The judgement condition used to stop the loop</span>
-<span class="sd">    is_prime : bool</span>
-<span class="sd">        The judgement condition used to judge whether the number is prime</span>
+<span class="sd">    expression : math expression</span>
+<span class="sd">        Required math expression</span>
+<span class="sd">    length : int</span>
+<span class="sd">        Required expand length</span>
 <span class="sd">    </span>
 <span class="sd">    Returns </span>
 <span class="sd">    ----------------------</span>
-<span class="sd">    len(prime_list) : int</span>
-<span class="sd">        The least value of n for which the remainder first exceeds number.   </span>
+<span class="sd">    result : str</span>
+<span class="sd">        Obtain expanded decimal part as string.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="n">prime_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-    <span class="n">next_number</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">decimal</span> <span class="o">=</span> <span class="n">expression</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">decimal</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="n">length</span><span class="o">+</span><span class="mi">1</span><span class="p">))[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;Test function expansion&quot;&quot;&quot;</span>
+
+<span class="n">expansion</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">judge_prime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Judge whether a number is prime</span>
+<span class="sd">    </span>
+<span class="sd">    Parameter</span>
+<span class="sd">    ----------------------</span>
+<span class="sd">    n : int</span>
+<span class="sd">        number that need to be judged</span>
+<span class="sd">    prime_list: list</span>
+<span class="sd">        Contain all prime that less than sqrt(n)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns </span>
+<span class="sd">    ----------------------</span>
+<span class="sd">    True or False : Bool</span>
+<span class="sd">        Whether this number is prime</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">judge_list</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">]</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">judge_list</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">judge_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">judge_list</span><span class="p">),</span><span class="n">i</span><span class="p">):</span>
+                <span class="n">judge_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">prime_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">number</span> <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">judge_list</span><span class="p">))</span> <span class="k">if</span> <span class="n">judge_list</span><span class="p">[</span><span class="n">number</span><span class="p">]]</span>
+    <span class="k">for</span> <span class="n">prime</span> <span class="ow">in</span> <span class="n">prime_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">prime</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;Test judge_prime function&quot;&quot;&quot;</span>
+
+<span class="n">judge_prime</span><span class="p">(</span><span class="mi">1415926535897</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>False</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">sliding_windows</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate required number list from input string</span>
+<span class="sd">    </span>
+<span class="sd">    Parameter</span>
+<span class="sd">    ----------------------</span>
+<span class="sd">    string : str</span>
+<span class="sd">        a long number string (generated by expansion function)</span>
+<span class="sd">    n : int</span>
+<span class="sd">        Required number digits</span>
+<span class="sd">    </span>
+<span class="sd">    Returns </span>
+<span class="sd">    ----------------------</span>
+<span class="sd">    result : list</span>
+<span class="sd">        Generated n-digits number list using sliding windows</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="o">-</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">n</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;Test sliding_windows&quot;&quot;&quot;</span>
+
+<span class="n">sliding_windows</span><span class="p">(</span><span class="s1">&#39;18364827476&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[1836, 8364, 3648, 6482, 4827, 8274, 2747, 7476]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">first_n_digit_prime</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Find the first n-digits prime in expansion of expression</span>
+<span class="sd">    </span>
+<span class="sd">    Parameter</span>
+<span class="sd">    ----------------------</span>
+<span class="sd">    expression : math expression</span>
+<span class="sd">        Required math expression</span>
+<span class="sd">    n : int</span>
+<span class="sd">        Required number digits</span>
+<span class="sd">    requirement: int</span>
+<span class="sd">        Criteria for judging whether the loop should continues</span>
+<span class="sd">    </span>
+<span class="sd">    Returns </span>
+<span class="sd">    ----------------------</span>
+<span class="sd">    result : int </span>
+<span class="sd">        The first n-digits prime in expansion of expression</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
     <span class="n">requirement</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">while</span> <span class="n">requirement</span><span class="p">:</span>
-        <span class="n">is_prime</span>  <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">for</span> <span class="n">prime</span> <span class="ow">in</span> <span class="n">prime_list</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">next_number</span> <span class="o">%</span> <span class="n">prime</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">is_prime</span> <span class="o">=</span> <span class="kc">False</span>
-                <span class="k">break</span>
-        <span class="k">if</span> <span class="n">is_prime</span><span class="p">:</span>
-            <span class="n">prime_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">next_number</span><span class="p">)</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">prime_list</span><span class="p">)</span>
-            <span class="k">if</span> <span class="p">((</span><span class="n">next_number</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">n</span> <span class="o">+</span> <span class="p">(</span><span class="n">next_number</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">n</span><span class="p">)</span> <span class="o">%</span> <span class="n">next_number</span><span class="o">**</span><span class="mi">2</span> <span class="o">&gt;</span> <span class="n">number</span><span class="p">:</span>
+        <span class="n">times</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">expansion</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="mi">100</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="n">times</span><span class="p">)[(</span><span class="n">times</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="o">*</span><span class="n">n</span><span class="o">-</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">times</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):]</span>
+        <span class="n">number_list</span> <span class="o">=</span> <span class="n">sliding_windows</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">number_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">judge_prime</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
                 <span class="n">requirement</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">next_number</span> <span class="o">+=</span> <span class="mi">2</span> 
-    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">prime_list</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[247]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;Test our function</span>
-
-<span class="sd">Use time.time() to record time</span>
-<span class="sd">Need about 7 seconds</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">least_value_of_n</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">9</span><span class="p">)</span>
-<span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">process_time</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span> 
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">process_time</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>7037
-6.859994649887085
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[248]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;Obtain required result</span>
-
-<span class="sd">Use time.time() to record time</span>
-<span class="sd">Need about 125 seconds</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">least_value_of_n</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">process_time</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span> 
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">process_time</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>21035
-124.88217282295227
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Problem-125---Palindromic-sums-(solved-by-13356-people,-I-am-the-13357th.)">Problem 125 - Palindromic sums (solved by 13356 people, I am the 13357th.)<a class="anchor-link" href="#Problem-125---Palindromic-sums-(solved-by-13356-people,-I-am-the-13357th.)">&#182;</a></h4><p>The palindromic number 595 is interesting because it can be written as the sum of consecutive squares:  $6^2 + 7^2 + 8^2 + 9^2 + 10^2 + 11^2 + 12^2$.</p>
-<p>There are exactly eleven palindromes below one-thousand that can be written as consecutive square sums, and the sum of these palindromes is $4164$. Note that $1 = 0^2 + 1^2$ has not been included as this problem is concerned with the squares of positive integers.</p>
-<p>Find the sum of all the numbers less than $10^8$ that are both palindromic and can be written as the sum of consecutive squares.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h4><p>The largest consecutive number is less than or equal to int(sqrt(number/2))+1 because we need at least two square number. The formula for sum for consecutive squares from 1 to n is n(n+1)(2n+1)/6.
-Then the formula for sum for consecutive squares from $n_1$ to $n_2$ is $n_2(n_2+1)(2n_2+1)/6-n_1(n_1+1)(2n_1+1)/6$.</p>
-<p>From the subtraction of two non-adjacent numbers in the sum_square_array, we can find all numbers that can be written as the sum of consecutive squares and then test whether they are palindormic.</p>
-<p>Some of the number maybe repeated. We can use sum(set()) to remove repeating.</p>
-<p>The answer is 2906969179.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[255]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;Solution function for problem 125</span>
-
-<span class="sd">It is used to find the sum of all the numbers less than number</span>
-<span class="sd">that are both palindromic and can be written as the sum of consecutive squares</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="k">def</span> <span class="nf">sum_palindromes</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Find the sum of all the required palindromic less than number </span>
-<span class="sd">    </span>
-<span class="sd">    Parameter</span>
-<span class="sd">    ----------------------</span>
-<span class="sd">    number : int</span>
-<span class="sd">        The required number that palindromic should be less than.</span>
-<span class="sd">    result_list : list</span>
-<span class="sd">        Used to append required palindromic</span>
-<span class="sd">    n_array : np.array</span>
-<span class="sd">        Used to generate the first n sum of squares sequence</span>
-<span class="sd">    sum_square_array : np.array</span>
-<span class="sd">        The first n sum of squares sequence</span>
-<span class="sd">    test_number : int</span>
-<span class="sd">        Sum of consecutive squares</span>
-<span class="sd">    reqirement : bool</span>
-<span class="sd">        Used to test whether test_number is palindromic number</span>
-<span class="sd">    </span>
-<span class="sd">    Returns </span>
-<span class="sd">    ----------------------</span>
-<span class="sd">    result : int</span>
-<span class="sd">        sum of all the required palindromic less than number   </span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="n">result_list</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">n_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">number</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="mi">2</span><span class="p">))</span>    
-    <span class="n">sum_square_array</span> <span class="o">=</span> <span class="n">n_array</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_array</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n_array</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">6</span>
-    
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sum_square1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sum_square_array</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]):</span>
-        <span class="k">for</span> <span class="n">sum_square2</span> <span class="ow">in</span> <span class="n">sum_square_array</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">:]:</span>
-            <span class="n">test_number</span> <span class="o">=</span> <span class="n">sum_square2</span> <span class="o">-</span> <span class="n">sum_square1</span>
-            <span class="k">if</span> <span class="n">test_number</span> <span class="o">&lt;</span> <span class="n">number</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span>
-                <span class="n">num_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">test_number</span><span class="p">))</span>
-                <span class="n">requirement</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num_str</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)):</span>
-                    <span class="k">if</span> <span class="n">num_str</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">!=</span> <span class="n">num_str</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">l</span><span class="p">]:</span>
-                        <span class="n">requirement</span> <span class="o">=</span> <span class="kc">False</span>
-                        <span class="k">break</span>
-                <span class="k">if</span> <span class="n">requirement</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-                    <span class="n">result_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_number</span><span class="p">)</span>
-    
-    <span class="n">result</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">result_list</span><span class="p">))</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">number</span>
+                <span class="k">break</span>
+        <span class="n">times</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">result</span>
 </pre></div>
 
@@ -1424,15 +1433,12 @@ Then the formula for sum for consecutive squares from $n_1$ to $n_2$ is $n_2(n_2
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[256]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;Use 1000 to test our function</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;Test function first_n_digit_prime&quot;&quot;&quot;</span>
 
-<span class="sd">the result is the same as the answer that question gives</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="n">sum_palindromes</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">first_n_digit_prime</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1445,13 +1451,13 @@ Then the formula for sum for consecutive squares from $n_1$ to $n_2$ is $n_2(n_2
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[256]:</div>
+    <div class="prompt output_prompt">Out[9]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>4164.0</pre>
+<pre>7427466391</pre>
 </div>
 
 </div>
@@ -1462,22 +1468,12 @@ Then the formula for sum for consecutive squares from $n_1$ to $n_2$ is $n_2(n_2
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[251]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;Obtain required result</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;Obtain the required number&quot;&quot;&quot;</span>
 
-<span class="sd">Use time.time() to record time</span>
-<span class="sd">Need about 10 seconds</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">sum_palindromes</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">process_time</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span> 
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">process_time</span><span class="p">)</span>
+<span class="n">first_n_digit_prime</span><span class="p">(</span><span class="n">sym</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">17</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1490,148 +1486,13 @@ Then the formula for sum for consecutive squares from $n_1$ to $n_2$ is $n_2(n_2
 
 <div class="output_area">
 
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>2906969179.0
-10.738654136657715
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Proble-347---Largest-integer-divisible-by-two-primes-(solved-by-4402,-I-am-the-4403th.)">Proble 347 - Largest integer divisible by two primes (solved by 4402, I am the 4403th.)<a class="anchor-link" href="#Proble-347---Largest-integer-divisible-by-two-primes-(solved-by-4402,-I-am-the-4403th.)">&#182;</a></h4><p>The largest integer ≤ 100 that is only divisible by both the primes 2 and 3 is 96, as $96=32*3=2^5*3$. For two distinct primes p and q let M(p,q,N) be the largest positive integer ≤N only divisible by both p and q and M(p,q,N)=0 if such a positive integer does not exist.</p>
-<p>E.g. M(2,3,100)=96.
-M(3,5,100)=75 and not 90 because 90 is divisible by 2 ,3 and 5.
-Also M(2,73,100)=0 because there does not exist a positive integer ≤ 100 that is divisible by both 2 and 73.</p>
-<p>Let S(N) be the sum of all distinct M(p,q,N). S(100)=2262.</p>
-<p>Find S(10 000 000).</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h4><p>In this question, we can also first generate a prime list. For any new number, if it cannot be divisible by any prime number smaller than it, then it is also a prime number. In fact, we only need to test the prime number smaller sqrt of this new number.</p>
-<p>Then for any two different primes p and q, if their product is smaller than required N, then M(p,q,N) will be larger than 0. Suppose q is the larger prime, and $q^{n_2}&lt;N, q^{n_2+1}&gt;N$, then we decrease $n_2$ in turn, and find $n_1$ that is not 0 and make $q^{n_2}p^{n_1}&lt;N, q^{n_2}p^{n_1+1}&gt;N$. In this processing, temp will be replaced by the largest  $q^{n_2}p^{n_1}$. Then the final temp will be the M(p,q,N). Sum all the M(p,q,N) and we get the result.</p>
-<p>The answer is 11109800204052.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[252]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;Solution function for problem 347</span>
-
-<span class="sd">It is used to find the sum of all distinct M(p,q,N)</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="k">def</span> <span class="nf">sum_largest_integer</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Find the sum of all distinct M(p,q,N)</span>
-<span class="sd">    </span>
-<span class="sd">    Parameter</span>
-<span class="sd">    ----------------------</span>
-<span class="sd">    number : int</span>
-<span class="sd">        The required number N for S(N).</span>
-<span class="sd">    prime_list : list</span>
-<span class="sd">        The list increases prime numbers in order</span>
-<span class="sd">    is_prime : bool</span>
-<span class="sd">        The judgement condition used to judge whether the number is prime</span>
-<span class="sd">    upper : float</span>
-<span class="sd">        The largest possible prime value</span>
-<span class="sd">    temp : int</span>
-<span class="sd">        temporary value for largest integer</span>
-<span class="sd">    </span>
-<span class="sd">    </span>
-<span class="sd">    Returns </span>
-<span class="sd">    ----------------------</span>
-<span class="sd">    result : int</span>
-<span class="sd">        sum of all distinct M(p,q,N)   </span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">prime_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">test_prime</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">number</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">):</span>
-        <span class="n">is_prime</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="n">upper</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">test_prime</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">prime</span> <span class="ow">in</span> <span class="n">prime_list</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">prime</span> <span class="o">&gt;</span> <span class="n">upper</span><span class="p">:</span>
-                <span class="k">break</span>
-            <span class="k">if</span> <span class="n">test_prime</span> <span class="o">%</span> <span class="n">prime</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">is_prime</span> <span class="o">=</span> <span class="kc">False</span>
-                <span class="k">break</span>
-        <span class="k">if</span> <span class="n">is_prime</span><span class="p">:</span>
-            <span class="n">prime_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_prime</span><span class="p">)</span>
-            
-    <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">prime1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">prime_list</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">prime2</span> <span class="ow">in</span> <span class="n">prime_list</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]:</span>
-            <span class="k">if</span> <span class="n">prime1</span> <span class="o">*</span> <span class="n">prime2</span> <span class="o">&gt;</span> <span class="n">number</span><span class="p">:</span>
-                <span class="k">break</span>
-            <span class="n">temp</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">n2</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="k">while</span> <span class="n">prime2</span><span class="o">**</span><span class="n">n2</span> <span class="o">&lt;</span> <span class="n">number</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span>
-                <span class="n">n2</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">n2</span> <span class="o">-=</span> <span class="mi">1</span>        
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-                <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>
-                <span class="k">while</span> <span class="n">prime2</span><span class="o">**</span><span class="n">i</span><span class="o">*</span><span class="n">prime1</span><span class="o">**</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">number</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span>
-                    <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
-                <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">temp</span> <span class="o">&lt;</span> <span class="n">prime2</span><span class="o">**</span><span class="n">i</span><span class="o">*</span><span class="n">prime1</span><span class="o">**</span><span class="n">j</span><span class="p">:</span>
-                    <span class="n">temp</span> <span class="o">=</span> <span class="n">prime2</span><span class="o">**</span><span class="n">i</span><span class="o">*</span><span class="n">prime1</span><span class="o">**</span><span class="n">j</span>
-            <span class="n">result</span> <span class="o">+=</span> <span class="n">temp</span>
-    <span class="k">return</span> <span class="n">result</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[253]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;Use 100 to test our function</span>
-
-<span class="sd">the result is the same as the answer that question gives</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">sum_largest_integer</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">result</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[253]:</div>
+    <div class="prompt output_prompt">Out[10]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>2262</pre>
+<pre>8649375157</pre>
 </div>
 
 </div>
@@ -1642,44 +1503,13 @@ Also M(2,73,100)=0 because there does not exist a positive integer ≤ 100 that 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[254]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;Obtain required result</span>
-
-<span class="sd">Use time.time() to record time</span>
-<span class="sd">Need about 266 seconds</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">sum_largest_integer</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">7</span><span class="p">)</span>
-<span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">process_time</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span> 
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">process_time</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>11109800204052
-266.6260344982147
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -1721,28 +1551,6 @@ Also M(2,73,100)=0 because there does not exist a positive integer ≤ 100 that 
                     <h1>Other articles</h1>
                     <hr />
                     <ol id="posts-list" class="hfeed">
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/Homework 2 notebook.html" rel="bookmark"
-                           title="Permalink to Homework 2">Homework 2</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2021-09-19T00:00:00-04:00">
-                Published: Sun 19 September 2021
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/ruiqi-zhang.html">Ruiqi Zhang</a>
-        </address>
-<p>In <a href="/category/homework-2.html">Homework 2</a>.</p>
-
-</footer><!-- /.post-info -->                <p>Homework 2 for course 823 - Number theory and a Google recruitment puzzle</p>
-                <a class="readmore" href="/Homework 2 notebook.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
 
             <li><article class="hentry">
                 <header>
@@ -1827,6 +1635,28 @@ Also M(2,73,100)=0 because there does not exist a positive integer ≤ 100 that 
 }
 </script>
                 <a class="readmore" href="/Homework 1.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/Homework 1 notebook.html" rel="bookmark"
+                           title="Permalink to Homework 1">Homework 1</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2021-09-02T00:00:00-04:00">
+                Published: Thu 02 September 2021
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/ruiqi-zhang.html">Ruiqi Zhang</a>
+        </address>
+<p>In <a href="/category/homework-1.html">Homework 1</a>.</p>
+
+</footer><!-- /.post-info -->                <p>Homework 1 for course 823 - Math Fun</p>
+                <a class="readmore" href="/Homework 1 notebook.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->
