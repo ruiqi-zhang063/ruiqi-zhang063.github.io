@@ -1514,7 +1514,7 @@ h6:hover .anchor-link {
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="Homework 2"></category></entry><entry><title>Homework 1</title><link href="/Homework%201.html" rel="alternate"></link><published>2021-09-03T00:00:00-04:00</published><updated>2021-09-03T00:00:00-04:00</updated><author><name>Ruiqi Zhang</name></author><id>tag:None,2021-09-03:/Homework 1.html</id><summary type="html">&lt;h1&gt;Homework 1 - Math Fun&lt;/h1&gt;
+</content><category term="Homework 2"></category></entry><entry><title>Homework 1 Explanation</title><link href="/Homework%201.html" rel="alternate"></link><published>2021-09-03T00:00:00-04:00</published><updated>2021-09-03T00:00:00-04:00</updated><author><name>Ruiqi Zhang</name></author><id>tag:None,2021-09-03:/Homework 1.html</id><summary type="html">&lt;h1&gt;Homework 1 - Math Fun&lt;/h1&gt;
 &lt;h4&gt;Problem 123 - Prime square remainders (solved by 11386 people, I am the 11387th.)&lt;/h4&gt;
 &lt;p&gt;Let &lt;span class="math"&gt;\(p_n\)&lt;/span&gt; be the &lt;span class="math"&gt;\(n\)&lt;/span&gt;th prime: &lt;span class="math"&gt;\(2, 3, 5, 7, 11, ...,\)&lt;/span&gt; and let &lt;span class="math"&gt;\(r\)&lt;/span&gt; be the remainder when &lt;span class="math"&gt;\((p_n−1)^n + (p_n+1)^n\)&lt;/span&gt; is divided by &lt;span class="math"&gt;\(p_n^2\)&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;For example, when …&lt;/p&gt;&lt;script type='text/javascript'&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
@@ -1670,7 +1670,7 @@ Also M(2,73,100)=0 because there does not exist a positive integer ≤ 100 that 
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="Homework 1"></category></entry><entry><title>Homework 1</title><link href="/Homework%201%20notebook.html" rel="alternate"></link><published>2021-09-02T00:00:00-04:00</published><updated>2021-09-02T00:00:00-04:00</updated><author><name>Ruiqi Zhang</name></author><id>tag:None,2021-09-02:/Homework 1 notebook.html</id><summary type="html">&lt;p&gt;Homework 1 for course 823 - Math Fun&lt;/p&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
+&lt;/script&gt;</content><category term="Homework 1"></category></entry><entry><title>Homework 1 Code</title><link href="/Homework%201%20notebook.html" rel="alternate"></link><published>2021-09-02T00:00:00-04:00</published><updated>2021-09-02T00:00:00-04:00</updated><author><name>Ruiqi Zhang</name></author><id>tag:None,2021-09-02:/Homework 1 notebook.html</id><summary type="html">&lt;p&gt;Homework 1 code for course 823 - Math Fun&lt;/p&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
