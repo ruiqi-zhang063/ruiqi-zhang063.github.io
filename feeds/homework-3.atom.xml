@@ -1,0 +1,2080 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>BIOS823 Assignment - Homework 3</title><link href="/" rel="alternate"></link><link href="/feeds/homework-3.atom.xml" rel="self"></link><id>/</id><updated>2021-10-01T00:00:00-04:00</updated><subtitle></subtitle><entry><title>Homework 3 Explanation</title><link href="/Homework%203.html" rel="alternate"></link><published>2021-10-01T00:00:00-04:00</published><updated>2021-10-01T00:00:00-04:00</updated><author><name>Ruiqi Zhang</name></author><id>tag:None,2021-10-01:/Homework 3.html</id><summary type="html">&lt;h1&gt;Homework 3 - Creating effective visualizations using best practices&lt;/h1&gt;
+&lt;h4&gt;Library: Altair&lt;/h4&gt;
+&lt;p&gt;The reason I choose "Altair" is that this library is convenient. I want to achieve several interactive behaviors including multi-Line Tooltip, interactive average and interactive legend, and of these interactions can be implemented in "altair".&lt;/p&gt;
+&lt;h4&gt;The first visualization&lt;/h4&gt;
+&lt;p&gt;The first …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Homework 3 - Creating effective visualizations using best practices&lt;/h1&gt;
+&lt;h4&gt;Library: Altair&lt;/h4&gt;
+&lt;p&gt;The reason I choose "Altair" is that this library is convenient. I want to achieve several interactive behaviors including multi-Line Tooltip, interactive average and interactive legend, and of these interactions can be implemented in "altair".&lt;/p&gt;
+&lt;h4&gt;The first visualization&lt;/h4&gt;
+&lt;p&gt;The first visualization is used to compare different counties malaria deaths or malaria incidence. The first parameter is a list of country name, representing the countries we want to compare. The second parameter is a string, inputing 'Deaths' means that we want to compare malaria deaths, while inpunting 'Incidence' means that we want to compare incidence.&lt;/p&gt;
+&lt;p&gt;The visualization has interactive behavior tied to the x position of the cursor. When the cursor is moved over, the most recent value will be displayed.&lt;/p&gt;
+&lt;h4&gt;The second visualization&lt;/h4&gt;
+&lt;p&gt;The second visualization is used to obtain the n countries with the highest number of deaths or infection rates in a given year. The first parameter is an int input, representing the year we are interested. The second parameter is an int input, meaning the number of countries we want to see. The third parameter is a string, inputing 'Deaths' means that we want to compare malaria deaths, while inpunting 'Incidence' means that we want to compare incidence.&lt;/p&gt;
+&lt;p&gt;The visualization uses an interval selection, which causes the chart to include an interactive brush (shown in grey). The brush selection parameterizes the red guideline, which visualizes the average value within the selected interval.&lt;/p&gt;
+&lt;h3&gt;The third visualization&lt;/h3&gt;
+&lt;p&gt;The third visualization is used to obtain the specified country age group distribution about malaria deaths. The only parameter is a string, representing the country we are interested in.&lt;/p&gt;
+&lt;p&gt;The visualization has interactive legend. We can choose one category of the legend to see specific age group area.&lt;/p&gt;</content><category term="Homework 3"></category></entry><entry><title>Homework 3 Code</title><link href="/Homework%203%20notebook.html" rel="alternate"></link><published>2021-09-30T00:00:00-04:00</published><updated>2021-09-30T00:00:00-04:00</updated><author><name>Ruiqi Zhang</name></author><id>tag:None,2021-09-30:/Homework 3 notebook.html</id><summary type="html">&lt;p&gt;Homework 3 code for course 823 - Creating effective visualizations using best practices&lt;/p&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
+.ansibold {
+  font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
+  border-color: #ababab;
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
+}
+@media print {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell &gt; div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area &gt; div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area &gt; div.highlight &gt; pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the &lt;head&gt; if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
+  border: 0;
+  border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev &lt;Maniac@SoftwareManiacs.Org&gt;
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+div.output_area .mglyph &gt; img {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 1px 0 1px 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+
+
+
+.rendered_html pre,
+
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell &gt; div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+&lt;/style&gt;
+&lt;style type="text/css"&gt; .highlight pre  .hll { background-color: #ffffcc }
+ .highlight pre   { background: #f8f8f8; }
+ .highlight pre  .c { color: #408080; font-style: italic } /* Comment */
+ .highlight pre  .err { border: 1px solid #FF0000 } /* Error */
+ .highlight pre  .k { color: #008000; font-weight: bold } /* Keyword */
+ .highlight pre  .o { color: #666666 } /* Operator */
+ .highlight pre  .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+ .highlight pre  .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+ .highlight pre  .cp { color: #BC7A00 } /* Comment.Preproc */
+ .highlight pre  .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+ .highlight pre  .c1 { color: #408080; font-style: italic } /* Comment.Single */
+ .highlight pre  .cs { color: #408080; font-style: italic } /* Comment.Special */
+ .highlight pre  .gd { color: #A00000 } /* Generic.Deleted */
+ .highlight pre  .ge { font-style: italic } /* Generic.Emph */
+ .highlight pre  .gr { color: #FF0000 } /* Generic.Error */
+ .highlight pre  .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+ .highlight pre  .gi { color: #00A000 } /* Generic.Inserted */
+ .highlight pre  .go { color: #888888 } /* Generic.Output */
+ .highlight pre  .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+ .highlight pre  .gs { font-weight: bold } /* Generic.Strong */
+ .highlight pre  .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+ .highlight pre  .gt { color: #0044DD } /* Generic.Traceback */
+ .highlight pre  .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+ .highlight pre  .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+ .highlight pre  .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+ .highlight pre  .kp { color: #008000 } /* Keyword.Pseudo */
+ .highlight pre  .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+ .highlight pre  .kt { color: #B00040 } /* Keyword.Type */
+ .highlight pre  .m { color: #666666 } /* Literal.Number */
+ .highlight pre  .s { color: #BA2121 } /* Literal.String */
+ .highlight pre  .na { color: #7D9029 } /* Name.Attribute */
+ .highlight pre  .nb { color: #008000 } /* Name.Builtin */
+ .highlight pre  .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+ .highlight pre  .no { color: #880000 } /* Name.Constant */
+ .highlight pre  .nd { color: #AA22FF } /* Name.Decorator */
+ .highlight pre  .ni { color: #999999; font-weight: bold } /* Name.Entity */
+ .highlight pre  .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+ .highlight pre  .nf { color: #0000FF } /* Name.Function */
+ .highlight pre  .nl { color: #A0A000 } /* Name.Label */
+ .highlight pre  .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+ .highlight pre  .nt { color: #008000; font-weight: bold } /* Name.Tag */
+ .highlight pre  .nv { color: #19177C } /* Name.Variable */
+ .highlight pre  .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+ .highlight pre  .w { color: #bbbbbb } /* Text.Whitespace */
+ .highlight pre  .mb { color: #666666 } /* Literal.Number.Bin */
+ .highlight pre  .mf { color: #666666 } /* Literal.Number.Float */
+ .highlight pre  .mh { color: #666666 } /* Literal.Number.Hex */
+ .highlight pre  .mi { color: #666666 } /* Literal.Number.Integer */
+ .highlight pre  .mo { color: #666666 } /* Literal.Number.Oct */
+ .highlight pre  .sa { color: #BA2121 } /* Literal.String.Affix */
+ .highlight pre  .sb { color: #BA2121 } /* Literal.String.Backtick */
+ .highlight pre  .sc { color: #BA2121 } /* Literal.String.Char */
+ .highlight pre  .dl { color: #BA2121 } /* Literal.String.Delimiter */
+ .highlight pre  .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+ .highlight pre  .s2 { color: #BA2121 } /* Literal.String.Double */
+ .highlight pre  .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+ .highlight pre  .sh { color: #BA2121 } /* Literal.String.Heredoc */
+ .highlight pre  .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+ .highlight pre  .sx { color: #008000 } /* Literal.String.Other */
+ .highlight pre  .sr { color: #BB6688 } /* Literal.String.Regex */
+ .highlight pre  .s1 { color: #BA2121 } /* Literal.String.Single */
+ .highlight pre  .ss { color: #19177C } /* Literal.String.Symbol */
+ .highlight pre  .bp { color: #008000 } /* Name.Builtin.Pseudo */
+ .highlight pre  .fm { color: #0000FF } /* Name.Function.Magic */
+ .highlight pre  .vc { color: #19177C } /* Name.Variable.Class */
+ .highlight pre  .vg { color: #19177C } /* Name.Variable.Global */
+ .highlight pre  .vi { color: #19177C } /* Name.Variable.Instance */
+ .highlight pre  .vm { color: #19177C } /* Name.Variable.Magic */
+ .highlight pre  .il { color: #666666 } /* Literal.Number.Integer.Long */&lt;/style&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Homework-3---Creating-effective-visualizations-using-best-practices"&gt;Homework 3 - Creating effective visualizations using best practices&lt;a class="anchor-link" href="#Homework-3---Creating-effective-visualizations-using-best-practices"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;h4 id="Ruiqi-Zhang"&gt;Ruiqi Zhang&lt;a class="anchor-link" href="#Ruiqi-Zhang"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h4 id="Blog:"&gt;Blog:&lt;a class="anchor-link" href="#Blog:"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;&lt;a href="https://ruiqi-zhang063.github.io"&gt;https://ruiqi-zhang063.github.io&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id="Github-repository"&gt;Github repository&lt;a class="anchor-link" href="#Github-repository"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;&lt;a href="https://github.com/ruiqi-zhang063/ruiqi-zhang063.github.io"&gt;https://github.com/ruiqi-zhang063/ruiqi-zhang063.github.io&lt;/a&gt;&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Install-Package"&gt;Install Package&lt;a class="anchor-link" href="#Install-Package"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[1]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# ! pip install altair&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Import-Packages"&gt;Import Packages&lt;a class="anchor-link" href="#Import-Packages"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[2]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;altair&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;alt&lt;/span&gt;
+&lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data_transformers&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;disable_max_rows&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[2]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;DataTransformerRegistry.enable(&amp;#39;default&amp;#39;)&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Load-Data"&gt;Load Data&lt;a class="anchor-link" href="#Load-Data"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[3]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;url_1&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-11-13/malaria_deaths.csv&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;malaria_deaths&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url_1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;url_2&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-11-13/malaria_deaths_age.csv&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;malaria_deaths_age&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url_2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;url_3&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-11-13/malaria_inc.csv&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;malaria_inc&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url_3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Look-at-the-first-5-rows-of-the-data"&gt;Look at the first 5 rows of the data&lt;a class="anchor-link" href="#Look-at-the-first-5-rows-of-the-data"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[4]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;malaria_deaths&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[4]:&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;Entity&lt;/th&gt;
+      &lt;th&gt;Code&lt;/th&gt;
+      &lt;th&gt;Year&lt;/th&gt;
+      &lt;th&gt;Deaths - Malaria - Sex: Both - Age: Age-standardized (Rate) (per 100,000 people)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt;Afghanistan&lt;/td&gt;
+      &lt;td&gt;AFG&lt;/td&gt;
+      &lt;td&gt;1990&lt;/td&gt;
+      &lt;td&gt;6.802930&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;Afghanistan&lt;/td&gt;
+      &lt;td&gt;AFG&lt;/td&gt;
+      &lt;td&gt;1991&lt;/td&gt;
+      &lt;td&gt;6.973494&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;td&gt;Afghanistan&lt;/td&gt;
+      &lt;td&gt;AFG&lt;/td&gt;
+      &lt;td&gt;1992&lt;/td&gt;
+      &lt;td&gt;6.989882&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;td&gt;Afghanistan&lt;/td&gt;
+      &lt;td&gt;AFG&lt;/td&gt;
+      &lt;td&gt;1993&lt;/td&gt;
+      &lt;td&gt;7.088983&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;td&gt;Afghanistan&lt;/td&gt;
+      &lt;td&gt;AFG&lt;/td&gt;
+      &lt;td&gt;1994&lt;/td&gt;
+      &lt;td&gt;7.392472&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[5]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;malaria_inc&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[5]:&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;Entity&lt;/th&gt;
+      &lt;th&gt;Code&lt;/th&gt;
+      &lt;th&gt;Year&lt;/th&gt;
+      &lt;th&gt;Incidence of malaria (per 1,000 population at risk) (per 1,000 population at risk)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt;Afghanistan&lt;/td&gt;
+      &lt;td&gt;AFG&lt;/td&gt;
+      &lt;td&gt;2000&lt;/td&gt;
+      &lt;td&gt;107.100000&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;Afghanistan&lt;/td&gt;
+      &lt;td&gt;AFG&lt;/td&gt;
+      &lt;td&gt;2005&lt;/td&gt;
+      &lt;td&gt;46.500000&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;td&gt;Afghanistan&lt;/td&gt;
+      &lt;td&gt;AFG&lt;/td&gt;
+      &lt;td&gt;2010&lt;/td&gt;
+      &lt;td&gt;23.900000&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;td&gt;Afghanistan&lt;/td&gt;
+      &lt;td&gt;AFG&lt;/td&gt;
+      &lt;td&gt;2015&lt;/td&gt;
+      &lt;td&gt;23.600000&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;td&gt;Algeria&lt;/td&gt;
+      &lt;td&gt;DZA&lt;/td&gt;
+      &lt;td&gt;2000&lt;/td&gt;
+      &lt;td&gt;0.037746&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[6]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;malaria_deaths_age&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[6]:&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;Unnamed: 0&lt;/th&gt;
+      &lt;th&gt;entity&lt;/th&gt;
+      &lt;th&gt;code&lt;/th&gt;
+      &lt;th&gt;year&lt;/th&gt;
+      &lt;th&gt;age_group&lt;/th&gt;
+      &lt;th&gt;deaths&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Afghanistan&lt;/td&gt;
+      &lt;td&gt;AFG&lt;/td&gt;
+      &lt;td&gt;1990&lt;/td&gt;
+      &lt;td&gt;Under 5&lt;/td&gt;
+      &lt;td&gt;184.606435&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Afghanistan&lt;/td&gt;
+      &lt;td&gt;AFG&lt;/td&gt;
+      &lt;td&gt;1991&lt;/td&gt;
+      &lt;td&gt;Under 5&lt;/td&gt;
+      &lt;td&gt;191.658193&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;Afghanistan&lt;/td&gt;
+      &lt;td&gt;AFG&lt;/td&gt;
+      &lt;td&gt;1992&lt;/td&gt;
+      &lt;td&gt;Under 5&lt;/td&gt;
+      &lt;td&gt;197.140197&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;Afghanistan&lt;/td&gt;
+      &lt;td&gt;AFG&lt;/td&gt;
+      &lt;td&gt;1993&lt;/td&gt;
+      &lt;td&gt;Under 5&lt;/td&gt;
+      &lt;td&gt;207.357753&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;Afghanistan&lt;/td&gt;
+      &lt;td&gt;AFG&lt;/td&gt;
+      &lt;td&gt;1994&lt;/td&gt;
+      &lt;td&gt;Under 5&lt;/td&gt;
+      &lt;td&gt;226.209363&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Rename-columns"&gt;Rename columns&lt;a class="anchor-link" href="#Rename-columns"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[7]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;malaria_deaths&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;malaria_deaths&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rename&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;Deaths - Malaria - Sex: Both - Age: Age-standardized (Rate) (per 100,000 people)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Deaths (per 100,000 people)&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;span class="n"&gt;malaria_inc&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;malaria_inc&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rename&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;Incidence of malaria (per 1,000 population at risk) (per 1,000 population at risk)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Incidence (per 1,000 population at risk)&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="The-first-visualization"&gt;The first visualization&lt;a class="anchor-link" href="#The-first-visualization"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The first visualization is used to compare different counties malaria deaths or malaria incidence. The first parameter is a list of country name, representing the countries we want to compare. The second parameter is a string, inputing 'Deaths' means that we want to compare malaria deaths, while inpunting 'Incidence' means that we want to compare incidence.&lt;/p&gt;
+&lt;p&gt;The visualization has interactive behavior tied to the x position of the cursor. When the cursor is moved over, the most recent value will be displayed.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[8]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;Country_Compare&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;country_list&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;compare_label&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="sd"&gt;    Compare different counties malaria deaths or malaria incidence.&lt;/span&gt;
+&lt;span class="sd"&gt;    &lt;/span&gt;
+&lt;span class="sd"&gt;    Parameter&lt;/span&gt;
+&lt;span class="sd"&gt;    ---------&lt;/span&gt;
+&lt;span class="sd"&gt;    country_list: list&lt;/span&gt;
+&lt;span class="sd"&gt;        The list of countries name that we want to compare.&lt;/span&gt;
+&lt;span class="sd"&gt;    compare_label: str&lt;/span&gt;
+&lt;span class="sd"&gt;        The data we want to compare, must be either &amp;#39;Deaths&amp;#39; or &amp;#39;Incidence&amp;#39;.&lt;/span&gt;
+&lt;span class="sd"&gt;        &lt;/span&gt;
+&lt;span class="sd"&gt;    Result &lt;/span&gt;
+&lt;span class="sd"&gt;    ---------&lt;/span&gt;
+&lt;span class="sd"&gt;    figure: visualization&lt;/span&gt;
+&lt;span class="sd"&gt;        The line chart with interactive behavior tied to the x position of the cursor.&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+    
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;compare_label&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Deaths&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;malaria_deaths&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;malaria_deaths&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Entity&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;isin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;country_list&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+        &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Deaths (per 100,000 people)&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;compare_label&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Incidence&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;malaria_inc&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;malaria_inc&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Entity&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;isin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;country_list&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+        &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Incidence (per 1,000 population at risk)&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Compare_label is not correct, it should be either &amp;quot;Deaths&amp;quot; or &amp;quot;Incidence&amp;quot;&amp;#39;&lt;/span&gt;
+    
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;empty&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;No data for the corresponding country&amp;#39;&lt;/span&gt;
+    
+    &lt;span class="n"&gt;nearest&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;selection&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;single&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nearest&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;mouseover&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="n"&gt;fields&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Year&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;empty&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;none&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    
+    &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Chart&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark_line&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Year&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+        &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+        &lt;span class="n"&gt;color&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Entity&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+    
+    &lt;span class="n"&gt;selectors&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Chart&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark_point&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Year:Q&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;opacity&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_selection&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;nearest&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+    
+    &lt;span class="n"&gt;points&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark_point&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;opacity&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;condition&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nearest&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+    
+    &lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark_text&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;align&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;left&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dx&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dy&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;condition&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nearest&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+    
+    &lt;span class="n"&gt;rules&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Chart&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark_rule&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;gray&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Year:Q&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;transform_filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;nearest&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+    
+    &lt;span class="n"&gt;figure&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;layer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;selectors&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;points&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rules&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+    
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;figure&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Example-of-the-first-visualization"&gt;Example of the first visualization&lt;a class="anchor-link" href="#Example-of-the-first-visualization"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[9]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Country_Compare&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Afghanistan&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Algeria&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Angola&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Deaths&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[9]:&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+
+&lt;div id="altair-viz-2accf01c44d24ef5a6b2b510d653ad70"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-2accf01c44d24ef5a6b2b510d653ad70") {
+      outputDiv = document.getElementById("altair-viz-2accf01c44d24ef5a6b2b510d653ad70");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () =&gt; resolve(paths[lib]);
+        s.onerror = () =&gt; reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `&lt;div class="error" style="color:red;"&gt;${err}&lt;/div&gt;`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err =&gt; showError(`Javascript Error: ${err.message}&lt;br&gt;This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" &amp;&amp; define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err =&gt; showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() =&gt; loadScript("vega-lite"))
+        .then(() =&gt; loadScript("vega-embed"))
+        .catch(showError)
+        .then(() =&gt; displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "layer": [{"mark": "line", "encoding": {"color": {"type": "nominal", "field": "Entity"}, "x": {"type": "quantitative", "field": "Year"}, "y": {"type": "quantitative", "field": "Deaths (per 100,000 people)"}}}, {"mark": "point", "encoding": {"opacity": {"value": 0}, "x": {"type": "quantitative", "field": "Year"}}, "selection": {"selector001": {"type": "single", "nearest": true, "on": "mouseover", "fields": ["Year"], "empty": "none"}}}, {"mark": "point", "encoding": {"color": {"type": "nominal", "field": "Entity"}, "opacity": {"condition": {"value": 1, "selection": "selector001"}, "value": 0}, "x": {"type": "quantitative", "field": "Year"}, "y": {"type": "quantitative", "field": "Deaths (per 100,000 people)"}}}, {"mark": {"type": "rule", "color": "gray"}, "encoding": {"x": {"type": "quantitative", "field": "Year"}}, "transform": [{"filter": {"selection": "selector001"}}]}, {"mark": {"type": "text", "align": "left", "dx": 5, "dy": -5}, "encoding": {"color": {"type": "nominal", "field": "Entity"}, "text": {"condition": {"type": "quantitative", "field": "Deaths (per 100,000 people)", "selection": "selector001"}, "value": " "}, "x": {"type": "quantitative", "field": "Year"}, "y": {"type": "quantitative", "field": "Deaths (per 100,000 people)"}}}], "data": {"name": "data-8e232cb46307c6c2c5b53cd6d337982d"}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-8e232cb46307c6c2c5b53cd6d337982d": [{"Entity": "Afghanistan", "Code": "AFG", "Year": 1990, "Deaths (per 100,000 people)": 6.80293003775}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 1991, "Deaths (per 100,000 people)": 6.97349405696}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 1992, "Deaths (per 100,000 people)": 6.98988163679}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 1993, "Deaths (per 100,000 people)": 7.0889829234}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 1994, "Deaths (per 100,000 people)": 7.39247200965}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 1995, "Deaths (per 100,000 people)": 7.40551138776}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 1996, "Deaths (per 100,000 people)": 7.6267734406}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 1997, "Deaths (per 100,000 people)": 7.592172002489999}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 1998, "Deaths (per 100,000 people)": 7.79601413294}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 1999, "Deaths (per 100,000 people)": 7.80059216773}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 2000, "Deaths (per 100,000 people)": 7.939949100360001}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 2001, "Deaths (per 100,000 people)": 8.05494038795}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 2002, "Deaths (per 100,000 people)": 8.57779174894}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 2003, "Deaths (per 100,000 people)": 9.01248935473}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 2004, "Deaths (per 100,000 people)": 8.66658495836}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 2005, "Deaths (per 100,000 people)": 8.55104232466}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 2006, "Deaths (per 100,000 people)": 8.459951791169999}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 2007, "Deaths (per 100,000 people)": 8.266377986470001}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 2008, "Deaths (per 100,000 people)": 8.07789997471}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 2009, "Deaths (per 100,000 people)": 7.817881683099999}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 2010, "Deaths (per 100,000 people)": 7.27124898112}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 2011, "Deaths (per 100,000 people)": 6.82662928825}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 2012, "Deaths (per 100,000 people)": 6.61142463357}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 2013, "Deaths (per 100,000 people)": 7.1446281048}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 2014, "Deaths (per 100,000 people)": 7.1378352485}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 2015, "Deaths (per 100,000 people)": 7.19228299167}, {"Entity": "Afghanistan", "Code": "AFG", "Year": 2016, "Deaths (per 100,000 people)": 7.1394291368100005}, {"Entity": "Algeria", "Code": "DZA", "Year": 1990, "Deaths (per 100,000 people)": 0.0271297723085}, {"Entity": "Algeria", "Code": "DZA", "Year": 1991, "Deaths (per 100,000 people)": 0.0270241757699}, {"Entity": "Algeria", "Code": "DZA", "Year": 1992, "Deaths (per 100,000 people)": 0.0264763860692}, {"Entity": "Algeria", "Code": "DZA", "Year": 1993, "Deaths (per 100,000 people)": 0.0265663697361}, {"Entity": "Algeria", "Code": "DZA", "Year": 1994, "Deaths (per 100,000 people)": 0.0266985408268}, {"Entity": "Algeria", "Code": "DZA", "Year": 1995, "Deaths (per 100,000 people)": 0.0261510540625999}, {"Entity": "Algeria", "Code": "DZA", "Year": 1996, "Deaths (per 100,000 people)": 0.0264645289774}, {"Entity": "Algeria", "Code": "DZA", "Year": 1997, "Deaths (per 100,000 people)": 0.0266571187101}, {"Entity": "Algeria", "Code": "DZA", "Year": 1998, "Deaths (per 100,000 people)": 0.0271477543073}, {"Entity": "Algeria", "Code": "DZA", "Year": 1999, "Deaths (per 100,000 people)": 0.0268171888369}, {"Entity": "Algeria", "Code": "DZA", "Year": 2000, "Deaths (per 100,000 people)": 0.0265302728925}, {"Entity": "Algeria", "Code": "DZA", "Year": 2001, "Deaths (per 100,000 people)": 0.0263752626526}, {"Entity": "Algeria", "Code": "DZA", "Year": 2002, "Deaths (per 100,000 people)": 0.0262904965307}, {"Entity": "Algeria", "Code": "DZA", "Year": 2003, "Deaths (per 100,000 people)": 0.0260661930649999}, {"Entity": "Algeria", "Code": "DZA", "Year": 2004, "Deaths (per 100,000 people)": 0.0257758592529999}, {"Entity": "Algeria", "Code": "DZA", "Year": 2005, "Deaths (per 100,000 people)": 0.0252430980577}, {"Entity": "Algeria", "Code": "DZA", "Year": 2006, "Deaths (per 100,000 people)": 0.0247668358215999}, {"Entity": "Algeria", "Code": "DZA", "Year": 2007, "Deaths (per 100,000 people)": 0.0246758127504}, {"Entity": "Algeria", "Code": "DZA", "Year": 2008, "Deaths (per 100,000 people)": 0.0238742198505}, {"Entity": "Algeria", "Code": "DZA", "Year": 2009, "Deaths (per 100,000 people)": 0.0235125884410999}, {"Entity": "Algeria", "Code": "DZA", "Year": 2010, "Deaths (per 100,000 people)": 0.0226293845359}, {"Entity": "Algeria", "Code": "DZA", "Year": 2011, "Deaths (per 100,000 people)": 0.0223934274113}, {"Entity": "Algeria", "Code": "DZA", "Year": 2012, "Deaths (per 100,000 people)": 0.0224386377053}, {"Entity": "Algeria", "Code": "DZA", "Year": 2013, "Deaths (per 100,000 people)": 0.0216160447441}, {"Entity": "Algeria", "Code": "DZA", "Year": 2014, "Deaths (per 100,000 people)": 0.0217323769915999}, {"Entity": "Algeria", "Code": "DZA", "Year": 2015, "Deaths (per 100,000 people)": 0.0216291231219}, {"Entity": "Algeria", "Code": "DZA", "Year": 2016, "Deaths (per 100,000 people)": 0.0216693699682}, {"Entity": "Angola", "Code": "AGO", "Year": 1990, "Deaths (per 100,000 people)": 18.691206537600003}, {"Entity": "Angola", "Code": "AGO", "Year": 1991, "Deaths (per 100,000 people)": 19.1432106196}, {"Entity": "Angola", "Code": "AGO", "Year": 1992, "Deaths (per 100,000 people)": 19.3231365141}, {"Entity": "Angola", "Code": "AGO", "Year": 1993, "Deaths (per 100,000 people)": 20.1441105152}, {"Entity": "Angola", "Code": "AGO", "Year": 1994, "Deaths (per 100,000 people)": 21.0587903658}, {"Entity": "Angola", "Code": "AGO", "Year": 1995, "Deaths (per 100,000 people)": 22.0475143327}, {"Entity": "Angola", "Code": "AGO", "Year": 1996, "Deaths (per 100,000 people)": 22.8103115262}, {"Entity": "Angola", "Code": "AGO", "Year": 1997, "Deaths (per 100,000 people)": 24.178356514}, {"Entity": "Angola", "Code": "AGO", "Year": 1998, "Deaths (per 100,000 people)": 27.5072359772}, {"Entity": "Angola", "Code": "AGO", "Year": 1999, "Deaths (per 100,000 people)": 29.9265383039}, {"Entity": "Angola", "Code": "AGO", "Year": 2000, "Deaths (per 100,000 people)": 32.045191746200004}, {"Entity": "Angola", "Code": "AGO", "Year": 2001, "Deaths (per 100,000 people)": 36.3891316571}, {"Entity": "Angola", "Code": "AGO", "Year": 2002, "Deaths (per 100,000 people)": 42.2405918605}, {"Entity": "Angola", "Code": "AGO", "Year": 2003, "Deaths (per 100,000 people)": 45.782693201700006}, {"Entity": "Angola", "Code": "AGO", "Year": 2004, "Deaths (per 100,000 people)": 52.34482948390001}, {"Entity": "Angola", "Code": "AGO", "Year": 2005, "Deaths (per 100,000 people)": 54.0792880263}, {"Entity": "Angola", "Code": "AGO", "Year": 2006, "Deaths (per 100,000 people)": 52.1458879381}, {"Entity": "Angola", "Code": "AGO", "Year": 2007, "Deaths (per 100,000 people)": 48.6704136301}, {"Entity": "Angola", "Code": "AGO", "Year": 2008, "Deaths (per 100,000 people)": 42.3261045389}, {"Entity": "Angola", "Code": "AGO", "Year": 2009, "Deaths (per 100,000 people)": 35.9122452045}, {"Entity": "Angola", "Code": "AGO", "Year": 2010, "Deaths (per 100,000 people)": 31.9177779158}, {"Entity": "Angola", "Code": "AGO", "Year": 2011, "Deaths (per 100,000 people)": 28.6342035589}, {"Entity": "Angola", "Code": "AGO", "Year": 2012, "Deaths (per 100,000 people)": 27.5465727394}, {"Entity": "Angola", "Code": "AGO", "Year": 2013, "Deaths (per 100,000 people)": 28.686821890300003}, {"Entity": "Angola", "Code": "AGO", "Year": 2014, "Deaths (per 100,000 people)": 28.3474968449}, {"Entity": "Angola", "Code": "AGO", "Year": 2015, "Deaths (per 100,000 people)": 28.3801208333}, {"Entity": "Angola", "Code": "AGO", "Year": 2016, "Deaths (per 100,000 people)": 27.1486318101}]}}, {"mode": "vega-lite"});
+&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="The-second-visualization"&gt;The second visualization&lt;a class="anchor-link" href="#The-second-visualization"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The second visualization is used to obtain the n countries with the highest number of deaths or infection rates in a given year. The first parameter is an int input, representing the year we are interested. The second parameter is an int input, meaning the number of countries we want to see. The third parameter is a string, inputing 'Deaths' means that we want to compare malaria deaths, while inpunting 'Incidence' means that we want to compare incidence.&lt;/p&gt;
+&lt;p&gt;The visualization uses an interval selection, which causes the chart to include an interactive brush (shown in grey). The brush selection parameterizes the red guideline, which visualizes the average value within the selected interval.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[10]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;Year_Overview&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Year&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;number&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;compare_label&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="sd"&gt;    Obtain the n countries with the highest number of deaths or infection rates in a given year.&lt;/span&gt;
+&lt;span class="sd"&gt;    &lt;/span&gt;
+&lt;span class="sd"&gt;    Parameter&lt;/span&gt;
+&lt;span class="sd"&gt;    ---------&lt;/span&gt;
+&lt;span class="sd"&gt;    Year: int&lt;/span&gt;
+&lt;span class="sd"&gt;        The year we are interested in.&lt;/span&gt;
+&lt;span class="sd"&gt;    number: int&lt;/span&gt;
+&lt;span class="sd"&gt;        The number of countries we want to see.&lt;/span&gt;
+&lt;span class="sd"&gt;    compare_label: str&lt;/span&gt;
+&lt;span class="sd"&gt;        The data we want to see, must be either &amp;#39;Deaths&amp;#39; or &amp;#39;Incidence&amp;#39;.&lt;/span&gt;
+&lt;span class="sd"&gt;        &lt;/span&gt;
+&lt;span class="sd"&gt;    Result &lt;/span&gt;
+&lt;span class="sd"&gt;    ---------&lt;/span&gt;
+&lt;span class="sd"&gt;    figure: visualization&lt;/span&gt;
+&lt;span class="sd"&gt;        The bar chart with interactive behavior which visualizes the average value within the selected interval.&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+    
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;compare_label&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Deaths&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;malaria_deaths&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;malaria_deaths&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Year&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;Year&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Deaths (per 100,000 people)&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;compare_label&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Incidence&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;malaria_inc&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;malaria_inc&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Year&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;Year&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Incidence (per 1,000 population at risk)&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Compare_label is not correct, it should be either &amp;quot;Deaths&amp;quot; or &amp;quot;Incidence&amp;quot;&amp;#39;&lt;/span&gt;
+    
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;empty&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;No data for the corresponding Year&amp;#39;&lt;/span&gt;
+        
+    &lt;span class="n"&gt;data_sorted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort_values&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ascending&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;number&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    
+    &lt;span class="n"&gt;brush&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;selection&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;interval&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;encodings&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;y&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; 
+    
+    &lt;span class="n"&gt;bars&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Chart&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data_sorted&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark_bar&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;field&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Entity&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;nominal&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sort&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;x&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;descending&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt; 
+        &lt;span class="n"&gt;opacity&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;condition&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;brush&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;OpacityValue&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;OpacityValue&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.7&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_selection&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;brush&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+    
+    &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Chart&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark_rule&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;firebrick&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;mean(&lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s1"&gt;):Q&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SizeValue&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;transform_filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;brush&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+    
+    &lt;span class="n"&gt;figure&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;layer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;bars&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;data_sorted&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;figure&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Example-of-the-second-visualization"&gt;Example of the second visualization&lt;a class="anchor-link" href="#Example-of-the-second-visualization"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[11]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Year_Overview&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2010&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Deaths&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[11]:&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+
+&lt;div id="altair-viz-ca7befbd88d54bca963540110d987c49"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-ca7befbd88d54bca963540110d987c49") {
+      outputDiv = document.getElementById("altair-viz-ca7befbd88d54bca963540110d987c49");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () =&gt; resolve(paths[lib]);
+        s.onerror = () =&gt; reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `&lt;div class="error" style="color:red;"&gt;${err}&lt;/div&gt;`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err =&gt; showError(`Javascript Error: ${err.message}&lt;br&gt;This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" &amp;&amp; define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err =&gt; showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() =&gt; loadScript("vega-lite"))
+        .then(() =&gt; loadScript("vega-embed"))
+        .catch(showError)
+        .then(() =&gt; displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "layer": [{"mark": "bar", "encoding": {"opacity": {"condition": {"value": 1, "selection": "selector002"}, "value": 0.7}, "x": {"type": "quantitative", "field": "Deaths (per 100,000 people)"}, "y": {"type": "nominal", "field": "Entity", "sort": ["x", "descending"]}}, "selection": {"selector002": {"type": "interval", "encodings": ["y"]}}}, {"mark": {"type": "rule", "color": "firebrick"}, "encoding": {"size": {"value": 3}, "x": {"type": "quantitative", "aggregate": "mean", "field": "Deaths (per 100,000 people)"}}, "transform": [{"filter": {"selection": "selector002"}}]}], "data": {"name": "data-b90498e7a9be612b7eb6b3eb1d71a839"}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-b90498e7a9be612b7eb6b3eb1d71a839": [{"Entity": "Burkina Faso", "Code": "BFA", "Year": 2010, "Deaths (per 100,000 people)": 179.864739452}, {"Entity": "Sierra Leone", "Code": "SLE", "Year": 2010, "Deaths (per 100,000 people)": 174.054530337}, {"Entity": "Niger", "Code": "NER", "Year": 2010, "Deaths (per 100,000 people)": 159.835761706}, {"Entity": "Cote d'Ivoire", "Code": "CIV", "Year": 2010, "Deaths (per 100,000 people)": 152.849819144}, {"Entity": "Democratic Republic of Congo", "Code": "COD", "Year": 2010, "Deaths (per 100,000 people)": 124.69533038}, {"Entity": "Nigeria", "Code": "NGA", "Year": 2010, "Deaths (per 100,000 people)": 123.22225535}, {"Entity": "Equatorial Guinea", "Code": "GNQ", "Year": 2010, "Deaths (per 100,000 people)": 121.444742639}, {"Entity": "Western Sub-Saharan Africa", "Code": null, "Year": 2010, "Deaths (per 100,000 people)": 116.191973654}, {"Entity": "Togo", "Code": "TGO", "Year": 2010, "Deaths (per 100,000 people)": 112.719779929}, {"Entity": "Guinea", "Code": "GIN", "Year": 2010, "Deaths (per 100,000 people)": 112.09204834300002}, {"Entity": "Mali", "Code": "MLI", "Year": 2010, "Deaths (per 100,000 people)": 108.017693802}, {"Entity": "Cameroon", "Code": "CMR", "Year": 2010, "Deaths (per 100,000 people)": 106.411809625}, {"Entity": "Uganda", "Code": "UGA", "Year": 2010, "Deaths (per 100,000 people)": 105.840047211}, {"Entity": "Ghana", "Code": "GHA", "Year": 2010, "Deaths (per 100,000 people)": 102.418551398}, {"Entity": "Central Sub-Saharan Africa", "Code": null, "Year": 2010, "Deaths (per 100,000 people)": 97.9612857049}, {"Entity": "Liberia", "Code": "LBR", "Year": 2010, "Deaths (per 100,000 people)": 91.9070375626}, {"Entity": "Benin", "Code": "BEN", "Year": 2010, "Deaths (per 100,000 people)": 83.3210947806}, {"Entity": "Burundi", "Code": "BDI", "Year": 2010, "Deaths (per 100,000 people)": 82.8238283588}, {"Entity": "Central African Republic", "Code": "CAF", "Year": 2010, "Deaths (per 100,000 people)": 82.7872217906}, {"Entity": "Mozambique", "Code": "MOZ", "Year": 2010, "Deaths (per 100,000 people)": 73.91404849279999}]}}, {"mode": "vega-lite"});
+&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="The-third-visualization"&gt;The third visualization&lt;a class="anchor-link" href="#The-third-visualization"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;The third visualization is used to obtain the specified country age group distribution about malaria deaths. The only parameter is a string, representing the country we are interested in.&lt;/p&gt;
+&lt;p&gt;The visualization has interactive legend. We can choose one category of the legend to see specific age group area.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[12]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;Age_Distribution&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Country&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="sd"&gt;    Obtain the specified country age group distribution about malaria deaths.&lt;/span&gt;
+&lt;span class="sd"&gt;    &lt;/span&gt;
+&lt;span class="sd"&gt;    Parameter&lt;/span&gt;
+&lt;span class="sd"&gt;    ---------&lt;/span&gt;
+&lt;span class="sd"&gt;    Country: string&lt;/span&gt;
+&lt;span class="sd"&gt;        The country we are interested in.&lt;/span&gt;
+&lt;span class="sd"&gt;        &lt;/span&gt;
+&lt;span class="sd"&gt;    Result &lt;/span&gt;
+&lt;span class="sd"&gt;    ---------&lt;/span&gt;
+&lt;span class="sd"&gt;    figure: visualization&lt;/span&gt;
+&lt;span class="sd"&gt;        The area chart with interactive legend.&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+
+    &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;malaria_deaths_age&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;malaria_deaths_age&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;entity&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;Country&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;empty&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;No data for the corresponding county&amp;#39;&lt;/span&gt;
+    
+    &lt;span class="n"&gt;selection&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;selection_multi&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fields&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;age_group&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;bind&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;legend&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    
+    &lt;span class="n"&gt;figure&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Chart&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mark_area&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;year&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; 
+        &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;sum(deaths)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+        &lt;span class="n"&gt;color&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Color&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;age_group:N&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                  &lt;span class="n"&gt;sort&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Under 5&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;5-14&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;15-49&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                        &lt;span class="s1"&gt;&amp;#39;50-69&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;70 or older&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                         &lt;span class="p"&gt;),&lt;/span&gt;
+        &lt;span class="n"&gt;opacity&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;condition&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;selection&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_selection&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;selection&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+    
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;figure&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Example-of-the-third-visualization"&gt;Example of the third visualization&lt;a class="anchor-link" href="#Example-of-the-third-visualization"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[13]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Age_Distribution&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Mozambique&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[13]:&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+
+&lt;div id="altair-viz-bdcae7dbca784b6989c6e04e4ea3c8e9"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-bdcae7dbca784b6989c6e04e4ea3c8e9") {
+      outputDiv = document.getElementById("altair-viz-bdcae7dbca784b6989c6e04e4ea3c8e9");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () =&gt; resolve(paths[lib]);
+        s.onerror = () =&gt; reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `&lt;div class="error" style="color:red;"&gt;${err}&lt;/div&gt;`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err =&gt; showError(`Javascript Error: ${err.message}&lt;br&gt;This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" &amp;&amp; define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err =&gt; showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() =&gt; loadScript("vega-lite"))
+        .then(() =&gt; loadScript("vega-embed"))
+        .catch(showError)
+        .then(() =&gt; displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-7b18614435d29b1bd9de25ed3f28c939"}, "mark": "area", "encoding": {"color": {"type": "nominal", "field": "age_group", "sort": ["Under 5", "5-14", "15-49", "50-69", "70 or older"]}, "opacity": {"condition": {"value": 1, "selection": "selector003"}, "value": 0.2}, "x": {"type": "quantitative", "field": "year"}, "y": {"type": "quantitative", "aggregate": "sum", "field": "deaths"}}, "selection": {"selector003": {"type": "multi", "fields": ["age_group"], "bind": "legend"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-7b18614435d29b1bd9de25ed3f28c939": [{"Unnamed: 0": 3673, "entity": "Mozambique", "code": "MOZ", "year": 1990, "age_group": "Under 5", "deaths": 26848.7189525}, {"Unnamed: 0": 3674, "entity": "Mozambique", "code": "MOZ", "year": 1991, "age_group": "Under 5", "deaths": 26791.2371859}, {"Unnamed: 0": 3675, "entity": "Mozambique", "code": "MOZ", "year": 1992, "age_group": "Under 5", "deaths": 27011.8445426}, {"Unnamed: 0": 3676, "entity": "Mozambique", "code": "MOZ", "year": 1993, "age_group": "Under 5", "deaths": 27736.8096367}, {"Unnamed: 0": 3677, "entity": "Mozambique", "code": "MOZ", "year": 1994, "age_group": "Under 5", "deaths": 28178.4071473}, {"Unnamed: 0": 3678, "entity": "Mozambique", "code": "MOZ", "year": 1995, "age_group": "Under 5", "deaths": 28916.5692978}, {"Unnamed: 0": 3679, "entity": "Mozambique", "code": "MOZ", "year": 1996, "age_group": "Under 5", "deaths": 29363.7585261}, {"Unnamed: 0": 3680, "entity": "Mozambique", "code": "MOZ", "year": 1997, "age_group": "Under 5", "deaths": 29473.8634779}, {"Unnamed: 0": 3681, "entity": "Mozambique", "code": "MOZ", "year": 1998, "age_group": "Under 5", "deaths": 30169.4011642}, {"Unnamed: 0": 3682, "entity": "Mozambique", "code": "MOZ", "year": 1999, "age_group": "Under 5", "deaths": 30659.4044168}, {"Unnamed: 0": 3683, "entity": "Mozambique", "code": "MOZ", "year": 2000, "age_group": "Under 5", "deaths": 30282.6955049}, {"Unnamed: 0": 3684, "entity": "Mozambique", "code": "MOZ", "year": 2001, "age_group": "Under 5", "deaths": 30526.3891191}, {"Unnamed: 0": 3685, "entity": "Mozambique", "code": "MOZ", "year": 2002, "age_group": "Under 5", "deaths": 29879.6923838}, {"Unnamed: 0": 3686, "entity": "Mozambique", "code": "MOZ", "year": 2003, "age_group": "Under 5", "deaths": 28781.7256459}, {"Unnamed: 0": 3687, "entity": "Mozambique", "code": "MOZ", "year": 2004, "age_group": "Under 5", "deaths": 27182.5036932}, {"Unnamed: 0": 3688, "entity": "Mozambique", "code": "MOZ", "year": 2005, "age_group": "Under 5", "deaths": 24891.3531536}, {"Unnamed: 0": 3689, "entity": "Mozambique", "code": "MOZ", "year": 2006, "age_group": "Under 5", "deaths": 24649.5520057}, {"Unnamed: 0": 3690, "entity": "Mozambique", "code": "MOZ", "year": 2007, "age_group": "Under 5", "deaths": 22458.3816175}, {"Unnamed: 0": 3691, "entity": "Mozambique", "code": "MOZ", "year": 2008, "age_group": "Under 5", "deaths": 18779.0796857}, {"Unnamed: 0": 3692, "entity": "Mozambique", "code": "MOZ", "year": 2009, "age_group": "Under 5", "deaths": 19003.3042107}, {"Unnamed: 0": 3693, "entity": "Mozambique", "code": "MOZ", "year": 2010, "age_group": "Under 5", "deaths": 18816.370955}, {"Unnamed: 0": 3694, "entity": "Mozambique", "code": "MOZ", "year": 2011, "age_group": "Under 5", "deaths": 18216.0681566}, {"Unnamed: 0": 3695, "entity": "Mozambique", "code": "MOZ", "year": 2012, "age_group": "Under 5", "deaths": 18018.0206025}, {"Unnamed: 0": 3696, "entity": "Mozambique", "code": "MOZ", "year": 2013, "age_group": "Under 5", "deaths": 16652.469507}, {"Unnamed: 0": 3697, "entity": "Mozambique", "code": "MOZ", "year": 2014, "age_group": "Under 5", "deaths": 14832.7050963}, {"Unnamed: 0": 3698, "entity": "Mozambique", "code": "MOZ", "year": 2015, "age_group": "Under 5", "deaths": 13581.807736}, {"Unnamed: 0": 3699, "entity": "Mozambique", "code": "MOZ", "year": 2016, "age_group": "Under 5", "deaths": 13428.8428981}, {"Unnamed: 0": 9829, "entity": "Mozambique", "code": "MOZ", "year": 1990, "age_group": "70 or older", "deaths": 432.337189821}, {"Unnamed: 0": 9830, "entity": "Mozambique", "code": "MOZ", "year": 1991, "age_group": "70 or older", "deaths": 453.1050577}, {"Unnamed: 0": 9831, "entity": "Mozambique", "code": "MOZ", "year": 1992, "age_group": "70 or older", "deaths": 463.691781542}, {"Unnamed: 0": 9832, "entity": "Mozambique", "code": "MOZ", "year": 1993, "age_group": "70 or older", "deaths": 488.01162598}, {"Unnamed: 0": 9833, "entity": "Mozambique", "code": "MOZ", "year": 1994, "age_group": "70 or older", "deaths": 510.083239142}, {"Unnamed: 0": 9834, "entity": "Mozambique", "code": "MOZ", "year": 1995, "age_group": "70 or older", "deaths": 532.376657357}, {"Unnamed: 0": 9835, "entity": "Mozambique", "code": "MOZ", "year": 1996, "age_group": "70 or older", "deaths": 569.163691655}, {"Unnamed: 0": 9836, "entity": "Mozambique", "code": "MOZ", "year": 1997, "age_group": "70 or older", "deaths": 599.233765908}, {"Unnamed: 0": 9837, "entity": "Mozambique", "code": "MOZ", "year": 1998, "age_group": "70 or older", "deaths": 621.269811769}, {"Unnamed: 0": 9838, "entity": "Mozambique", "code": "MOZ", "year": 1999, "age_group": "70 or older", "deaths": 636.817894521}, {"Unnamed: 0": 9839, "entity": "Mozambique", "code": "MOZ", "year": 2000, "age_group": "70 or older", "deaths": 654.183975881}, {"Unnamed: 0": 9840, "entity": "Mozambique", "code": "MOZ", "year": 2001, "age_group": "70 or older", "deaths": 666.931976577}, {"Unnamed: 0": 9841, "entity": "Mozambique", "code": "MOZ", "year": 2002, "age_group": "70 or older", "deaths": 679.861018146}, {"Unnamed: 0": 9842, "entity": "Mozambique", "code": "MOZ", "year": 2003, "age_group": "70 or older", "deaths": 693.667393246}, {"Unnamed: 0": 9843, "entity": "Mozambique", "code": "MOZ", "year": 2004, "age_group": "70 or older", "deaths": 688.880896819}, {"Unnamed: 0": 9844, "entity": "Mozambique", "code": "MOZ", "year": 2005, "age_group": "70 or older", "deaths": 686.853928748}, {"Unnamed: 0": 9845, "entity": "Mozambique", "code": "MOZ", "year": 2006, "age_group": "70 or older", "deaths": 689.257550696}, {"Unnamed: 0": 9846, "entity": "Mozambique", "code": "MOZ", "year": 2007, "age_group": "70 or older", "deaths": 690.204287223}, {"Unnamed: 0": 9847, "entity": "Mozambique", "code": "MOZ", "year": 2008, "age_group": "70 or older", "deaths": 587.011648141}, {"Unnamed: 0": 9848, "entity": "Mozambique", "code": "MOZ", "year": 2009, "age_group": "70 or older", "deaths": 660.629362375}, {"Unnamed: 0": 9849, "entity": "Mozambique", "code": "MOZ", "year": 2010, "age_group": "70 or older", "deaths": 739.214708948}, {"Unnamed: 0": 9850, "entity": "Mozambique", "code": "MOZ", "year": 2011, "age_group": "70 or older", "deaths": 784.812989094}, {"Unnamed: 0": 9851, "entity": "Mozambique", "code": "MOZ", "year": 2012, "age_group": "70 or older", "deaths": 834.025996726}, {"Unnamed: 0": 9852, "entity": "Mozambique", "code": "MOZ", "year": 2013, "age_group": "70 or older", "deaths": 819.131930773}, {"Unnamed: 0": 9853, "entity": "Mozambique", "code": "MOZ", "year": 2014, "age_group": "70 or older", "deaths": 775.960659096}, {"Unnamed: 0": 9854, "entity": "Mozambique", "code": "MOZ", "year": 2015, "age_group": "70 or older", "deaths": 747.181877245}, {"Unnamed: 0": 9855, "entity": "Mozambique", "code": "MOZ", "year": 2016, "age_group": "70 or older", "deaths": 753.456422912}, {"Unnamed: 0": 15985, "entity": "Mozambique", "code": "MOZ", "year": 1990, "age_group": "5-14", "deaths": 2625.57110558}, {"Unnamed: 0": 15986, "entity": "Mozambique", "code": "MOZ", "year": 1991, "age_group": "5-14", "deaths": 2626.02066686}, {"Unnamed: 0": 15987, "entity": "Mozambique", "code": "MOZ", "year": 1992, "age_group": "5-14", "deaths": 2651.79616046}, {"Unnamed: 0": 15988, "entity": "Mozambique", "code": "MOZ", "year": 1993, "age_group": "5-14", "deaths": 2765.90116189}, {"Unnamed: 0": 15989, "entity": "Mozambique", "code": "MOZ", "year": 1994, "age_group": "5-14", "deaths": 2798.72630962}, {"Unnamed: 0": 15990, "entity": "Mozambique", "code": "MOZ", "year": 1995, "age_group": "5-14", "deaths": 2815.10821204}, {"Unnamed: 0": 15991, "entity": "Mozambique", "code": "MOZ", "year": 1996, "age_group": "5-14", "deaths": 2871.62493816}, {"Unnamed: 0": 15992, "entity": "Mozambique", "code": "MOZ", "year": 1997, "age_group": "5-14", "deaths": 2939.47746943}, {"Unnamed: 0": 15993, "entity": "Mozambique", "code": "MOZ", "year": 1998, "age_group": "5-14", "deaths": 2982.50319878}, {"Unnamed: 0": 15994, "entity": "Mozambique", "code": "MOZ", "year": 1999, "age_group": "5-14", "deaths": 3006.90805502}, {"Unnamed: 0": 15995, "entity": "Mozambique", "code": "MOZ", "year": 2000, "age_group": "5-14", "deaths": 2995.66388367}, {"Unnamed: 0": 15996, "entity": "Mozambique", "code": "MOZ", "year": 2001, "age_group": "5-14", "deaths": 2996.66272763}, {"Unnamed: 0": 15997, "entity": "Mozambique", "code": "MOZ", "year": 2002, "age_group": "5-14", "deaths": 3005.16255729}, {"Unnamed: 0": 15998, "entity": "Mozambique", "code": "MOZ", "year": 2003, "age_group": "5-14", "deaths": 2920.48937578}, {"Unnamed: 0": 15999, "entity": "Mozambique", "code": "MOZ", "year": 2004, "age_group": "5-14", "deaths": 2796.03836039}, {"Unnamed: 0": 16000, "entity": "Mozambique", "code": "MOZ", "year": 2005, "age_group": "5-14", "deaths": 2663.38852719}, {"Unnamed: 0": 16001, "entity": "Mozambique", "code": "MOZ", "year": 2006, "age_group": "5-14", "deaths": 2646.70841295}, {"Unnamed: 0": 16002, "entity": "Mozambique", "code": "MOZ", "year": 2007, "age_group": "5-14", "deaths": 2490.88463996}, {"Unnamed: 0": 16003, "entity": "Mozambique", "code": "MOZ", "year": 2008, "age_group": "5-14", "deaths": 2155.05534697}, {"Unnamed: 0": 16004, "entity": "Mozambique", "code": "MOZ", "year": 2009, "age_group": "5-14", "deaths": 2239.40038326}, {"Unnamed: 0": 16005, "entity": "Mozambique", "code": "MOZ", "year": 2010, "age_group": "5-14", "deaths": 2293.27368673}, {"Unnamed: 0": 16006, "entity": "Mozambique", "code": "MOZ", "year": 2011, "age_group": "5-14", "deaths": 2301.48376423}, {"Unnamed: 0": 16007, "entity": "Mozambique", "code": "MOZ", "year": 2012, "age_group": "5-14", "deaths": 2353.81940383}, {"Unnamed: 0": 16008, "entity": "Mozambique", "code": "MOZ", "year": 2013, "age_group": "5-14", "deaths": 2201.18538543}, {"Unnamed: 0": 16009, "entity": "Mozambique", "code": "MOZ", "year": 2014, "age_group": "5-14", "deaths": 2043.77002969}, {"Unnamed: 0": 16010, "entity": "Mozambique", "code": "MOZ", "year": 2015, "age_group": "5-14", "deaths": 1869.44595933}, {"Unnamed: 0": 16011, "entity": "Mozambique", "code": "MOZ", "year": 2016, "age_group": "5-14", "deaths": 1851.19305088}, {"Unnamed: 0": 22141, "entity": "Mozambique", "code": "MOZ", "year": 1990, "age_group": "15-49", "deaths": 1314.72437955}, {"Unnamed: 0": 22142, "entity": "Mozambique", "code": "MOZ", "year": 1991, "age_group": "15-49", "deaths": 1394.73422873}, {"Unnamed: 0": 22143, "entity": "Mozambique", "code": "MOZ", "year": 1992, "age_group": "15-49", "deaths": 1450.39453978}, {"Unnamed: 0": 22144, "entity": "Mozambique", "code": "MOZ", "year": 1993, "age_group": "15-49", "deaths": 1547.61876567}, {"Unnamed: 0": 22145, "entity": "Mozambique", "code": "MOZ", "year": 1994, "age_group": "15-49", "deaths": 1623.31373905}, {"Unnamed: 0": 22146, "entity": "Mozambique", "code": "MOZ", "year": 1995, "age_group": "15-49", "deaths": 1687.04856705}, {"Unnamed: 0": 22147, "entity": "Mozambique", "code": "MOZ", "year": 1996, "age_group": "15-49", "deaths": 1787.75315458}, {"Unnamed: 0": 22148, "entity": "Mozambique", "code": "MOZ", "year": 1997, "age_group": "15-49", "deaths": 1873.98414085}, {"Unnamed: 0": 22149, "entity": "Mozambique", "code": "MOZ", "year": 1998, "age_group": "15-49", "deaths": 1923.15608537}, {"Unnamed: 0": 22150, "entity": "Mozambique", "code": "MOZ", "year": 1999, "age_group": "15-49", "deaths": 1950.14476788}, {"Unnamed: 0": 22151, "entity": "Mozambique", "code": "MOZ", "year": 2000, "age_group": "15-49", "deaths": 1988.90854837}, {"Unnamed: 0": 22152, "entity": "Mozambique", "code": "MOZ", "year": 2001, "age_group": "15-49", "deaths": 1971.1190304}, {"Unnamed: 0": 22153, "entity": "Mozambique", "code": "MOZ", "year": 2002, "age_group": "15-49", "deaths": 1965.93892571}, {"Unnamed: 0": 22154, "entity": "Mozambique", "code": "MOZ", "year": 2003, "age_group": "15-49", "deaths": 1951.71479815}, {"Unnamed: 0": 22155, "entity": "Mozambique", "code": "MOZ", "year": 2004, "age_group": "15-49", "deaths": 1899.62605689}, {"Unnamed: 0": 22156, "entity": "Mozambique", "code": "MOZ", "year": 2005, "age_group": "15-49", "deaths": 1858.43443934}, {"Unnamed: 0": 22157, "entity": "Mozambique", "code": "MOZ", "year": 2006, "age_group": "15-49", "deaths": 1819.74791247}, {"Unnamed: 0": 22158, "entity": "Mozambique", "code": "MOZ", "year": 2007, "age_group": "15-49", "deaths": 1790.53820643}, {"Unnamed: 0": 22159, "entity": "Mozambique", "code": "MOZ", "year": 2008, "age_group": "15-49", "deaths": 1489.93329039}, {"Unnamed: 0": 22160, "entity": "Mozambique", "code": "MOZ", "year": 2009, "age_group": "15-49", "deaths": 1621.31975318}, {"Unnamed: 0": 22161, "entity": "Mozambique", "code": "MOZ", "year": 2010, "age_group": "15-49", "deaths": 1768.01276291}, {"Unnamed: 0": 22162, "entity": "Mozambique", "code": "MOZ", "year": 2011, "age_group": "15-49", "deaths": 1853.37951159}, {"Unnamed: 0": 22163, "entity": "Mozambique", "code": "MOZ", "year": 2012, "age_group": "15-49", "deaths": 1935.56319542}, {"Unnamed: 0": 22164, "entity": "Mozambique", "code": "MOZ", "year": 2013, "age_group": "15-49", "deaths": 1908.12417874}, {"Unnamed: 0": 22165, "entity": "Mozambique", "code": "MOZ", "year": 2014, "age_group": "15-49", "deaths": 1817.59937407}, {"Unnamed: 0": 22166, "entity": "Mozambique", "code": "MOZ", "year": 2015, "age_group": "15-49", "deaths": 1762.37954067}, {"Unnamed: 0": 22167, "entity": "Mozambique", "code": "MOZ", "year": 2016, "age_group": "15-49", "deaths": 1786.37180237}, {"Unnamed: 0": 28297, "entity": "Mozambique", "code": "MOZ", "year": 1990, "age_group": "50-69", "deaths": 747.184103194}, {"Unnamed: 0": 28298, "entity": "Mozambique", "code": "MOZ", "year": 1991, "age_group": "50-69", "deaths": 775.527155561}, {"Unnamed: 0": 28299, "entity": "Mozambique", "code": "MOZ", "year": 1992, "age_group": "50-69", "deaths": 789.446570957}, {"Unnamed: 0": 28300, "entity": "Mozambique", "code": "MOZ", "year": 1993, "age_group": "50-69", "deaths": 826.801169727}, {"Unnamed: 0": 28301, "entity": "Mozambique", "code": "MOZ", "year": 1994, "age_group": "50-69", "deaths": 857.713573875}, {"Unnamed: 0": 28302, "entity": "Mozambique", "code": "MOZ", "year": 1995, "age_group": "50-69", "deaths": 890.39258502}, {"Unnamed: 0": 28303, "entity": "Mozambique", "code": "MOZ", "year": 1996, "age_group": "50-69", "deaths": 943.180752491}, {"Unnamed: 0": 28304, "entity": "Mozambique", "code": "MOZ", "year": 1997, "age_group": "50-69", "deaths": 987.163584232}, {"Unnamed: 0": 28305, "entity": "Mozambique", "code": "MOZ", "year": 1998, "age_group": "50-69", "deaths": 1009.45731484}, {"Unnamed: 0": 28306, "entity": "Mozambique", "code": "MOZ", "year": 1999, "age_group": "50-69", "deaths": 1018.11492334}, {"Unnamed: 0": 28307, "entity": "Mozambique", "code": "MOZ", "year": 2000, "age_group": "50-69", "deaths": 1032.34420357}, {"Unnamed: 0": 28308, "entity": "Mozambique", "code": "MOZ", "year": 2001, "age_group": "50-69", "deaths": 1024.31280968}, {"Unnamed: 0": 28309, "entity": "Mozambique", "code": "MOZ", "year": 2002, "age_group": "50-69", "deaths": 1024.14959993}, {"Unnamed: 0": 28310, "entity": "Mozambique", "code": "MOZ", "year": 2003, "age_group": "50-69", "deaths": 1018.64669112}, {"Unnamed: 0": 28311, "entity": "Mozambique", "code": "MOZ", "year": 2004, "age_group": "50-69", "deaths": 992.35120143}, {"Unnamed: 0": 28312, "entity": "Mozambique", "code": "MOZ", "year": 2005, "age_group": "50-69", "deaths": 975.460807604}, {"Unnamed: 0": 28313, "entity": "Mozambique", "code": "MOZ", "year": 2006, "age_group": "50-69", "deaths": 955.623152495}, {"Unnamed: 0": 28314, "entity": "Mozambique", "code": "MOZ", "year": 2007, "age_group": "50-69", "deaths": 945.819155048}, {"Unnamed: 0": 28315, "entity": "Mozambique", "code": "MOZ", "year": 2008, "age_group": "50-69", "deaths": 789.92395458}, {"Unnamed: 0": 28316, "entity": "Mozambique", "code": "MOZ", "year": 2009, "age_group": "50-69", "deaths": 875.770714018}, {"Unnamed: 0": 28317, "entity": "Mozambique", "code": "MOZ", "year": 2010, "age_group": "50-69", "deaths": 968.622467805}, {"Unnamed: 0": 28318, "entity": "Mozambique", "code": "MOZ", "year": 2011, "age_group": "50-69", "deaths": 1015.41199355}, {"Unnamed: 0": 28319, "entity": "Mozambique", "code": "MOZ", "year": 2012, "age_group": "50-69", "deaths": 1067.2469626}, {"Unnamed: 0": 28320, "entity": "Mozambique", "code": "MOZ", "year": 2013, "age_group": "50-69", "deaths": 1042.1160888}, {"Unnamed: 0": 28321, "entity": "Mozambique", "code": "MOZ", "year": 2014, "age_group": "50-69", "deaths": 982.75129749}, {"Unnamed: 0": 28322, "entity": "Mozambique", "code": "MOZ", "year": 2015, "age_group": "50-69", "deaths": 944.58178101}, {"Unnamed: 0": 28323, "entity": "Mozambique", "code": "MOZ", "year": 2016, "age_group": "50-69", "deaths": 954.029362712}]}}, {"mode": "vega-lite"});
+&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[&amp;nbsp;]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; 
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+ 
+
+
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;
+</content><category term="Homework 3"></category></entry></feed>
