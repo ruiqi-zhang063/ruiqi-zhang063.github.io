@@ -3,7 +3,7 @@
 <head>
         <meta charset="utf-8" />
         <meta name="generator" content="Pelican" />
-        <title>BIOS823 Assignment - Homework 3</title>
+        <title>BIOS823 Assignment - Homework 5</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
         <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="BIOS823 Assignment Atom Feed" />
 </head>
@@ -14,37 +14,34 @@
                 <nav><ul>
                     <li><a href="/category/homework-1.html">Homework 1</a></li>
                     <li><a href="/category/homework-2.html">Homework 2</a></li>
-                    <li class="active"><a href="/category/homework-3.html">Homework 3</a></li>
+                    <li><a href="/category/homework-3.html">Homework 3</a></li>
                     <li><a href="/category/homework-4.html">Homework 4</a></li>
-                    <li><a href="/category/homework-5.html">Homework 5</a></li>
+                    <li class="active"><a href="/category/homework-5.html">Homework 5</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/Homework 3.html">Homework 3 Explanation</a></h1>
+                    <h1 class="entry-title"><a href="/Homework 5.html">Homework 5 Explanation</a></h1>
 <footer class="post-info">
-        <abbr class="published" title="2021-10-01T00:00:00-04:00">
-                Published: Fri 01 October 2021
+        <abbr class="published" title="2021-11-15T00:00:00-05:00">
+                Published: Mon 15 November 2021
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/ruiqi-zhang.html">Ruiqi Zhang</a>
         </address>
-<p>In <a href="/category/homework-3.html">Homework 3</a>.</p>
+<p>In <a href="/category/homework-5.html">Homework 5</a>.</p>
 
-</footer><!-- /.post-info --><h1>Homework 3 - Creating effective visualizations using best practices</h1>
-<h4>Library: Altair</h4>
-<p>The reason I choose "Altair" is that this library is convenient. I want to achieve several interactive behaviors including multi-Line Tooltip, interactive average and interactive legend, and of these interactions can be implemented in "altair".</p>
-<h4>The first visualization</h4>
-<p>The first visualization is used to compare different counties malaria deaths or malaria incidence. The first parameter is a list of country name, representing the countries we want to compare. The second parameter is a string, inputing 'Deaths' means that we want to compare malaria deaths, while inpunting 'Incidence' means that we want to compare incidence.</p>
-<p>The visualization has interactive behavior tied to the x position of the cursor. When the cursor is moved over, the most recent value will be displayed.</p>
-<h4>The second visualization</h4>
-<p>The second visualization is used to obtain the n countries with the highest number of deaths or infection rates in a given year. The first parameter is an int input, representing the year we are interested. The second parameter is an int input, meaning the number of countries we want to see. The third parameter is a string, inputing 'Deaths' means that we want to compare malaria deaths, while inpunting 'Incidence' means that we want to compare incidence.</p>
-<p>The visualization uses an interval selection, which causes the chart to include an interactive brush (shown in grey). The brush selection parameterizes the red guideline, which visualizes the average value within the selected interval.</p>
-<h3>The third visualization</h3>
-<p>The third visualization is used to obtain the specified country age group distribution about malaria deaths. The only parameter is a string, representing the country we are interested in.</p>
-<p>The visualization has interactive legend. We can choose one category of the legend to see specific age group area.</p>                </article>
+</footer><!-- /.post-info --><h1>Homework 5 - Dive into Deep Learning</h1>
+<h4>Library Version</h4>
+<p>In this assignment, the version of tensorflow is 2.5.0, new version of tensorflow may casue some problems. </p>
+<h4>Model Training</h4>
+<p>For convenience, we use relative simple model with only one convolutional layer and pooling layer. This model can be trained quickly and has a hign accuracy in testing dataset. In training dataset, we keep 20% data as a validation dataset. After training model, we plot the training history of loss and accuracy. </p>
+<p>The results have 99% accuracy in the test dataset. Consider the model is simple and the dataset is not very large, the accuaracy is a bit too high. Therefore, we want to see how the model works.</p>
+<h4>Model Explanation</h4>
+<p>Predictions for two input images are explained in the plot. Red pixels represent positive SHAP values that increase the probability of the class, while blue pixels represent negative SHAP values the reduce the probability of the class.</p>
+<p>We can see that the main basis for classification is the numbers in the lower right corner. Since the results on the test set are still very accurate, it means that the numbers in the lower right corner may have some regularity, which makes classification easier. Besides the numbers in the lower right corner, dragonfly wings and the shape of the cockroach are also used for classification.</p>                </article>
             </aside><!-- /#featured -->
                 <section id="content" class="body">
                     <h1>Other articles</h1>
@@ -53,23 +50,23 @@
 
             <li><article class="hentry">
                 <header>
-                    <h1><a href="/Homework 3 notebook.html" rel="bookmark"
-                           title="Permalink to Homework 3 Code">Homework 3 Code</a></h1>
+                    <h1><a href="/Homework 5 notebook.html" rel="bookmark"
+                           title="Permalink to Homework 5 Code">Homework 5 Code</a></h1>
                 </header>
 
                 <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2021-09-30T00:00:00-04:00">
-                Published: Thu 30 September 2021
+        <abbr class="published" title="2021-11-15T00:00:00-05:00">
+                Published: Mon 15 November 2021
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/ruiqi-zhang.html">Ruiqi Zhang</a>
         </address>
-<p>In <a href="/category/homework-3.html">Homework 3</a>.</p>
+<p>In <a href="/category/homework-5.html">Homework 5</a>.</p>
 
-</footer><!-- /.post-info -->                <p>Homework 3 code for course 823 - Creating effective visualizations using best practices</p>
-                <a class="readmore" href="/Homework 3 notebook.html">read more</a>
+</footer><!-- /.post-info -->                <p>Homework 5 code for course 823 - Dive into Deep Learning</p>
+                <a class="readmore" href="/Homework 5 notebook.html">read more</a>
                 </div><!-- /.entry-content -->
             </article></li>
                 </ol><!-- /#posts-list -->
